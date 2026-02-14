@@ -1,0 +1,5 @@
+[
+  { "Id": 1, "TypeName": "Basic", "Discount": 5 },
+  { "Id": 2, "TypeName": "Premium", "Discount": 15 },
+  { "Id": 3, "TypeName": "VIP", "Discount": 25 }
+]

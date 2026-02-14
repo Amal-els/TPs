@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<TP4.Models.MovieGenreDTO>
+
+<h2>Movies with Genres</h2>
+<table class="table">
+    <thead><tr><th>Title</th><th>Genre</th></tr></thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@m.Title</td>
+                <td>@m.Genre</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

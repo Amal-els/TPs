@@ -1,0 +1,5 @@
+[
+  { "Id": 1, "FullName": "Alice Smith", "IsSubscribed": true, "MembershipId": 2 },
+  { "Id": 2, "FullName": "Bob Johnson", "IsSubscribed": false, "MembershipId": 1 },
+  { "Id": 3, "FullName": "Charlie Brown", "IsSubscribed": true, "MembershipId": 3 }
+]

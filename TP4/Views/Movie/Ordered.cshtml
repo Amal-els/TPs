@@ -1,0 +1,45 @@
+﻿@model List<TP4.Models.Movie>
+
+@{
+    ViewData["Title"] = "Movies Ordered by Release Date";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-info">No movies available.</div>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Release Date</th>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td>
+                        @if (m.ReleaseDate != null)
+                        {
+                            @m.ReleaseDate.ToString("yyyy-MM-dd")
+                        }
+                        else
+                        {
+                            <span class="text-muted">Unknown</span>
+                        }
+                    </td>
+                    <td>@m.Title</td>
+                    <td>@(m.Genre?.Name ?? "N/A")</td>
+                    <td>@m.Stock</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

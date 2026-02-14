@@ -1,0 +1,45 @@
+﻿@* _Nav_Bar.cshtml *@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand" asp-controller="Movie" asp-action="Index">MVC Movie</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" 
+                aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <!-- Movies Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="moviesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Movies
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="moviesDropdown">
+                        <li><a class="dropdown-item" asp-controller="Movie" asp-action="Index">All Movies</a></li>
+                        <li><a class="dropdown-item" asp-controller="Movie" asp-action="ActionInStock">Action In Stock</a></li>
+                        <li><a class="dropdown-item" asp-controller="Movie" asp-action="Ordered">Ordered</a></li>
+                        <li><a class="dropdown-item" asp-controller="Movie" asp-action="Count">Total Count</a></li>
+                        <li><a class="dropdown-item" asp-controller="Movie" asp-action="TopGenres">Top Genres</a></li>
+                    </ul>
+                </li>
+
+                <!-- Customers Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="customersDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Customers
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="customersDropdown">
+                        <li><a class="dropdown-item" asp-controller="Customer" asp-action="Index">All Customers</a></li>
+                        <li><a class="dropdown-item" asp-controller="Customer" asp-action="SubscribedWithDiscount">Subscribed with Discount</a></li>
+                    </ul>
+                </li>
+
+                <!-- Optional Home/Privacy links -->
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
