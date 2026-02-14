@@ -1,0 +1,30 @@
+@model TP1.Models.Movie
+@{
+    ViewData["Title"] = "Détails du Film";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="row g-0">
+            
+          
+
+            <!-- Movie Details -->
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title display-5 mb-3">@Model.Name</h2>
+                    <p class="card-text"><strong>ID:</strong> @Model.Id</p>
+
+
+                    <div class="mt-4">
+                        
+                        <a asp-action="CustomerDetails" asp-controller="Customer" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left-circle me-1"></i> Retour à la liste
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

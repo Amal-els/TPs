@@ -1,0 +1,32 @@
+@using TP1.Models
+@model TP1.Models.ViewModels.CustomerMoviesViewModel
+
+@{
+    ViewData["Title"] = "Customer Details";
+}
+
+<h2>Client : @Model.Customer.Name (Id: @Model.Customer.Id)</h2>
+
+<table class="table table-bordered table-striped text-center mt-4">
+    <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Nom du Film</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model.Movies)
+        {
+            <tr>
+                <td>@movie.Id</td>
+                <td>
+                    <a asp-controller="Customer"
+                    asp-action="CustomerMovieDetails"
+                    asp-route-id = "@movie.Id">
+                    @movie.Name
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

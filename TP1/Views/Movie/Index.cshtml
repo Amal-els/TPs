@@ -1,0 +1,38 @@
+
+@using TP1.Models;
+
+@{
+    ViewData["Title"] = "Liste des Films";
+}
+
+
+@model IEnumerable<TP1.Models.Movie>
+
+
+
+<h2 class="text-center mb-4">🎬 Liste des Films</h2>
+
+<table class="table table-bordered table-striped text-center mt-4">
+    <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Nom du Film</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td>@movie.Id</td>
+                <td>
+                    <a asp-controller="Movie"
+                    asp-action="Details"
+                    asp-route-id = "@movie.Id">
+                    @movie.Name
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
