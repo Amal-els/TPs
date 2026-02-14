@@ -1,0 +1,39 @@
+@model TP3.Models.Customers
+
+@{
+    ViewData["Title"] = "Customer Details";
+}
+
+<div class="container mt-4">
+    <h2>Customer Details</h2>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-3">Name:</dt>
+        <dd class="col-sm-9">@Model.Name</dd>
+
+        <dt class="col-sm-3">Membership Fee:</dt>
+        <dd class="col-sm-9">@Model.Membershiptypes?.SignUpFee</dd>
+
+        <dt class="col-sm-3">Associated Movies:</dt>
+        <dd class="col-sm-9">
+            @if (Model.Movies != null && Model.Movies.Any())
+            {
+                <ul>
+                    @foreach (var movie in Model.Movies)
+                    {
+                        <li>@movie.Name (@movie.Year)</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <span>No movies associated</span>
+            }
+        </dd>
+    </dl>
+
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</div>

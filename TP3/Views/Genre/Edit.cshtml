@@ -1,0 +1,32 @@
+@model TP3.Models.Genres
+
+@{
+    ViewData["Title"] = "Edit Genre";
+}
+
+<div class="container mt-4">
+    <h2>✏️ Edit Genre</h2>
+    <hr />
+
+    <form asp-action="Edit" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label asp-for="GenreName" class="form-label"></label>
+            <input asp-for="GenreName" class="form-control" />
+            <span asp-validation-for="GenreName" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save"></i> Save Changes
+        </button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">
+            <i class="bi bi-arrow-left"></i> Back
+        </a>
+    </form>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

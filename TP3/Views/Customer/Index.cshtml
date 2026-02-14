@@ -1,0 +1,46 @@
+@model IEnumerable<TP3.Models.Customers>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container mt-4">
+    <h2>Customers</h2>
+    
+    <p>
+        <a asp-action="Create" class="btn btn-link">Create New</a>
+    </p>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>DiscountRate</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model)
+            {
+                <tr>
+                    <td>@customer.Name</td>
+                    <td>
+                        @if (customer.Membershiptypes != null)
+                        {
+                            @customer.Membershiptypes.DiscountRate
+                        }
+                        else
+                        {
+                            <span class="text-muted">N/A</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@customer.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@customer.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@customer.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

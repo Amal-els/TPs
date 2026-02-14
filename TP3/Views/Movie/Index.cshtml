@@ -1,0 +1,83 @@
+@using Microsoft.AspNetCore.Mvc;
+@using Microsoft.VisualBasic
+@using TP3.Models;
+@using YourProjectNamespace.Helpers
+@model PaginatedList<Movies>
+
+@{
+    ViewBag.Title   = "Liste des Films";}
+
+<h2 class="text-center mb-4">🎬 Liste des Films</h2>
+
+<table class="table table-bordered table-striped table-hover text-center align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td>@movie.Id</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@movie.Id" class="text-decoration-none">
+                        @movie.Name
+                    </a>
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(movie.ImageFile))
+                    {
+                        <img src="~/images/@movie.ImageFile" alt="Movie Image" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">No image</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@movie.Id" class="btn btn-warning btn-sm me-2">
+                        <i class="bi bi-pencil-square"></i> Modifier
+                    </a>
+                    <form asp-action="Delete" asp-route-id="@movie.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Supprimer ce film ?');">
+                            <i class="bi bi-trash"></i> Supprimer
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav>
+    <ul class="pagination justify-content-center">
+
+        <!-- Previous button -->
+        <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+            <a class="page-link" asp-route-pageNumber="@(Model.PageIndex - 1)">Previous</a>
+        </li>
+
+        <!-- Page numbers -->
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                <a class="page-link" asp-route-pageNumber="@i">@i</a>
+            </li>
+        }
+
+        <!-- Next button -->
+        <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+            <a class="page-link" asp-route-pageNumber="@(Model.PageIndex + 1)">Next</a>
+        </li>
+
+    </ul>
+</nav>
+<div class="d-flex justify-content-center">
+<a asp-action="Create" class="btn btn-primary mt-3 ">
+    <i class="bi bi-plus-circle "></i> Ajouter un Film
+</a>
+</div>

@@ -1,0 +1,109 @@
+@model TP3.Models.Movies
+
+@{
+    ViewData["Title"] = "Edit Movie";
+}
+
+<div class="container mt-4">
+    <h2>✏️ Edit Movie</h2>
+    <hr />
+
+    @* ✅ Add error/success messages *@
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="ImageFile" />
+                @* ✅ Add DateAjoutMovie as hidden to preserve it *@
+                <input type="hidden" asp-for="DateAjoutMovie" />
+
+                <!-- Movie Name -->
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Movie Name</label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter movie name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <!-- Month & Year -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Month" class="form-label">Release Month</label>
+                        <select asp-for="Month" class="form-select">
+                            <option value="">-- Select Month --</option>
+                            @for (int i = 1; i <= 12; i++)
+                            {
+                                var monthName = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i);
+                                <option value="@i">@monthName</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Month" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Year" class="form-label">Release Year</label>
+                        <input asp-for="Year" class="form-control" type="number" min="1900" max="@DateTime.Now.Year" />
+                        <span asp-validation-for="Year" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Genre -->
+                <div class="mb-3">
+                    <label asp-for="genre_Id" class="form-label">Genre</label>
+                    <select asp-for="genre_Id" class="form-select" asp-items="ViewBag.Genres">
+                        <option value="">-- Select Genre --</option>
+                    </select>
+                    <span asp-validation-for="genre_Id" class="text-danger"></span>
+                </div>
+
+                <!-- Current Poster -->
+                @if (!string.IsNullOrEmpty(Model.ImageFile))
+                {
+                    <div class="mb-3">
+                        <label class="form-label">Current Poster</label><br />
+                        <img src="~/images/@Model.ImageFile" class="img-thumbnail" style="max-width: 200px;" alt="Current poster" />
+                    </div>
+                }
+
+                <!-- Upload New Poster -->
+                <div class="mb-3">
+                    <label class="form-label">Change Poster (optional)</label>
+                    <input type="file" name="photo" class="form-control" accept="image/*" />
+                    <div class="form-text">Formats: JPG, JPEG, PNG, GIF (Max 5 MB)</div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> Save Changes
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary ms-2">
+                        <i class="bi bi-arrow-left"></i> Back
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

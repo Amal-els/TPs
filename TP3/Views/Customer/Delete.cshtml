@@ -1,0 +1,29 @@
+@model TP3.Models.Customers
+
+@{
+    ViewData["Title"] = "Delete Customer";
+}
+
+<div class="container mt-4">
+    <h2>Delete Customer</h2>
+    <hr />
+
+    <div class="alert alert-danger">
+        <p>Are you sure you want to delete <strong>@Model.Name</strong>? This action cannot be undone.</p>
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Name:</dt>
+        <dd class="col-sm-9">@Model.Name</dd>
+
+        <dt class="col-sm-3">Membership Fee:</dt>
+        <dd class="col-sm-9">@Model.Membershiptypes?.SignUpFee ?? "None"</dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

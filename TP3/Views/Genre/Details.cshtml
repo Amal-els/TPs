@@ -1,0 +1,77 @@
+@model TP3.Models.Genres
+
+@{
+    ViewData["Title"] = "Genre Details";
+}
+
+<div class="container mt-4">
+    <h2>ℹ️ Genre Details</h2>
+    <hr />
+
+    <!-- Genre Info -->
+    <dl class="row">
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.GenreName)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.GenreName)</dd>
+    </dl>
+
+    <!-- Movies in this Genre -->
+    <h4 class="mt-4">🎬 Movies in this Genre</h4>
+    <hr />
+    @if (Model.Movies != null && Model.Movies.Any())
+    {
+        <table class="table table-bordered table-striped text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Month</th>
+                    <th>Year</th>
+                    <th>Poster</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var movie in Model.Movies)
+                {
+                    <tr>
+                        <td>@movie.Name</td>
+                        <td>@movie.Month</td>
+                        <td>@movie.Year</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(movie.ImageFile))
+                            {
+                                <img src="~/images/@movie.ImageFile" 
+                                     style="width:60px;height:60px;object-fit:cover;border-radius:4px;" />
+                            }
+                            else
+                            {
+                                <span class="text-muted">No image</span>
+                            }
+                        </td>
+                        <td>
+                            <a asp-controller="Movie" asp-action="Details" asp-route-id="@movie.Id" class="btn btn-info btn-sm">
+                                Details
+                            </a>
+                            <a asp-controller="Movie" asp-action="Edit" asp-route-id="@movie.Id" class="btn btn-warning btn-sm">
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="text-muted">No movies in this genre yet.</p>
+    }
+
+    <div class="mt-3">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning me-2">
+            <i class="bi bi-pencil-square"></i> Edit Genre
+        </a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger me-2">
+            <i class="bi bi-trash"></i> Delete Genre
+        </a>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
