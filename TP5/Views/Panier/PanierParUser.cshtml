@@ -1,0 +1,42 @@
+﻿@model IEnumerable<TP5.Models.PanierParUser>
+
+@{
+    ViewData["Title"] = "Mon Panier";
+    var produitNames = ViewBag.ProduitNames as Dictionary<Guid, string>;
+}
+
+<h1>Mon Panier</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Produit</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @(produitNames != null && produitNames.ContainsKey(item.ProduitId)
+                    ? produitNames[item.ProduitId]
+                    : "Produit inconnu")
+            </td>
+            <td>
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        Remove
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <p>Votre panier est vide.</p>
+}

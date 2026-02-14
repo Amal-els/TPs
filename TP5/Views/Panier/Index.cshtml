@@ -1,0 +1,25 @@
+﻿@model IEnumerable<TP5.Models.Produit>
+
+@{
+    ViewData["Title"] = "Produits";
+}
+
+<h1>Liste des Produits</h1>
+
+<div class="row">
+    @foreach (var produit in Model)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@produit.Nom</h5>
+                    <p class="card-text">@produit.Description</p>
+                    <p class="card-text"><strong>Prix: @produit.Prix.ToString("C")</strong></p>
+                    <a asp-action="AddToBasket" asp-route-produitId="@produit.Id" class="btn btn-primary">
+                        Ajouter au panier
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

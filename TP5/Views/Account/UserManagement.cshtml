@@ -1,0 +1,27 @@
+﻿@model IEnumerable<TP5.Models.ApplicationUser>
+
+@{
+    ViewData["Title"] = "UserManagement";
+}
+
+<h1>User Management</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Username</th>
+            <th>City</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Email</td>
+                <td>@item.UserName</td>
+                <td>@item.City</td>
+            </tr>
+        }
+    </tbody>
+</table>
