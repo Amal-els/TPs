@@ -1,0 +1,21 @@
+@model Genre
+
+@{
+    ViewData["Title"] = "Genre Details";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="card" style="width: 30rem;">
+    <div class="card-header">
+        Genre Information
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Name: @Model.Name</h5>
+        <p class="card-text"><strong>ID:</strong> @Model.Id</p>
+    </div>
+    <div class="card-footer">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
